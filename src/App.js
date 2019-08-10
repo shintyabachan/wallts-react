@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu, Breadcrumb, Button, Icon, Row, Col,  } from 'antd';
 
 class App extends Component {
   constructor() {
@@ -7,20 +7,34 @@ class App extends Component {
     this.state = {
       date: new Date(),
       name: 'Husni Ramdani',
+      count: 0,
+      price: 10000,
+      total: 0,
     };
   }
 
-  componentDidMount() {
-    setInterval(
-      () => this.setState({
-          date: new Date(),
-        }),
-      1000
-    );
-  }
+  tambah = () => {
+    let count = this.state.count + 1;
+    let total = this.state.price * count;
+    let name = 'Husni Ramdani';
+    if(count===10){
+      count = 0;
+      name = 'kambing';
+    }
+    this.setState({ 
+      count,
+      name,
+      total,
+     });
+  };
+
+  kurang = () => {
+    this.setState({ count: this.state.count-1 });
+  };
 
   render(){
     const { Header, Content, Footer } = Layout;
+
     return (
       <Layout className="layout" style={{ minHeight: "100vh"}}>
         <Header>
@@ -50,6 +64,24 @@ class App extends Component {
               <br/>
               {this.state.name}
             </h1>
+
+            <Row>
+              <Col span={3}>
+                <Button.Group>
+                  <Button onClick={this.kurang}>
+                    <Icon type="minus" />
+                  </Button>
+                  <Button onClick={this.tambah}>
+                    <Icon type="plus" />
+                  </Button>
+                </Button.Group>
+              </Col>
+              <Col span={2}>
+                <h1>{this.state.count}</h1>
+                <h1>{this.state.total}</h1>
+              </Col>
+            </Row>
+
           </div>
         </Content>
         <Footer style={{ textAlign: 'center' }}>HEHEHE 2019</Footer>
