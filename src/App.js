@@ -38,7 +38,6 @@ class App extends Component {
             </main>         
 
           </Content>
-          
           <Footer style={{ textAlign: 'center' }}>HEHEHE 2019</Footer>
         
         </Layout>

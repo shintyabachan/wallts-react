@@ -5,7 +5,7 @@ class Home extends Component {
     constructor() {
         super();
         this.state = {
-            name: 'Husni Ramdani',
+            name: 'Kambing :)',
             count: 0,
             total: 0,
             items: [],
@@ -13,22 +13,19 @@ class Home extends Component {
     }
 
     handlePressEnter = e => {
-        // Create a todo object containing its index and content
-        console.log(e.target);
         const item = {
-          content: e.target.value
+          content: e.target.value,
         };
     
-        // Add the todo to our array
         const newItems = this.state.items.concat(item);
     
         this.setState({
           items: newItems
         });
-        console.log(this.state.items);
       };
 
     render() { 
+        console.log(this.state.items);
         return ( 
             <div style={{ background: '#ECECEC', padding: 24, minHeight: "100%" }}>
             <h1>
@@ -36,9 +33,9 @@ class Home extends Component {
             </h1>
             <Row gutter={16}>
               <Col span={8}>
-                <Card title="Card title" bordered={false}>
+                <Card title="Baju" bordered={false}>
                   <Button
-                    value="tambah"
+                    value="Baju"
                     type="primary"
                     icon="plus"
                     onClick={this.handlePressEnter}
@@ -48,8 +45,14 @@ class Home extends Component {
                 </Card>
               </Col>
               <Col span={8}>
-                <Card title="Card title" bordered={false}>
-                  <Button type="primary" icon="plus">
+                <Card title="Celana" bordered={false}>
+                    <Button 
+                        value="Celana"
+                        price={10000}
+                        type="primary"
+                        icon="plus"
+                        onClick={this.handlePressEnter}
+                    >
                       Tambah
                     </Button>
                 </Card>
@@ -70,7 +73,9 @@ class Home extends Component {
                 footer={<div>Footer</div>}
                 bordered
                 dataSource={this.state.items}
-                renderItem={item => <List.Item>{item.content}</List.Item>}
+                renderItem={item => 
+                    <List.Item>{item.content}</List.Item>
+                }
               />
             </Row>
           </div>
