@@ -1,35 +1,31 @@
 import React, { Component } from 'react';
-import { Layout, Menu, Breadcrumb, Button, Icon, Row, Col,  } from 'antd';
+import { Layout, Menu, Breadcrumb, Button, Icon, Row, Col, Card, List } from 'antd';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      date: new Date(),
       name: 'Husni Ramdani',
       count: 0,
-      price: 10000,
       total: 0,
+      items: [],
     };
   }
 
-  tambah = () => {
-    let count = this.state.count + 1;
-    let total = this.state.price * count;
-    let name = 'Husni Ramdani';
-    if(count===10){
-      count = 0;
-      name = 'kambing';
-    }
-    this.setState({ 
-      count,
-      name,
-      total,
-     });
-  };
+  handlePressEnter = e => {
+    // Create a todo object containing its index and content
+    console.log(e.target);
+    const item = {
+      content: e.target.value
+    };
 
-  kurang = () => {
-    this.setState({ count: this.state.count-1 });
+    // Add the todo to our array
+    const newItems = this.state.items.concat(item);
+
+    this.setState({
+      items: newItems
+    });
+    console.log(this.state.items);
   };
 
   render(){
@@ -57,32 +53,51 @@ class App extends Component {
               <Breadcrumb.Item>List</Breadcrumb.Item>
               <Breadcrumb.Item>App</Breadcrumb.Item>
             </Breadcrumb>
-          <div style={{ background: '#fff', padding: 24, minHeight: "100%" }}>
-            <h1>Sekarang Jam</h1>
+          <div style={{ background: '#ECECEC', padding: 24, minHeight: "100%" }}>
             <h1>
-              {this.state.date.toLocaleTimeString()}
-              <br/>
-              {this.state.name}
+              Haloo {this.state.name}
             </h1>
-
-            <Row>
-              <Col span={3}>
-                <Button.Group>
-                  <Button onClick={this.kurang}>
-                    <Icon type="minus" />
+            <Row gutter={16}>
+              <Col span={8}>
+                <Card title="Card title" bordered={false}>
+                  <Button
+                    value="tambah"
+                    type="primary"
+                    icon="plus"
+                    onClick={this.handlePressEnter}
+                  >
+                    Tambah
                   </Button>
-                  <Button onClick={this.tambah}>
-                    <Icon type="plus" />
-                  </Button>
-                </Button.Group>
+                </Card>
               </Col>
-              <Col span={2}>
-                <h1>{this.state.count}</h1>
-                <h1>{this.state.total}</h1>
+              <Col span={8}>
+                <Card title="Card title" bordered={false}>
+                  <Button type="primary" icon="plus">
+                      Tambah
+                    </Button>
+                </Card>
+              </Col>
+              <Col span={8}>
+                <Card title="Card title" bordered={false}>
+                  <Button type="primary" icon="plus">
+                      Tambah
+                    </Button>
+                </Card>
               </Col>
             </Row>
-
+            <br />
+            <Row style={{ backgroundColor: "white" }}>
+              <List
+                size="small"
+                header={<div>Header</div>}
+                footer={<div>Footer</div>}
+                bordered
+                dataSource={this.state.items}
+                renderItem={item => <List.Item>{item.content}</List.Item>}
+              />
+            </Row>
           </div>
+
         </Content>
         <Footer style={{ textAlign: 'center' }}>HEHEHE 2019</Footer>
         
